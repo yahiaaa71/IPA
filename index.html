@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Device Info Logger</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+  <h2>Collecting your device info...</h2>
+  <pre id="result"></pre>
+
+  <script>
+    // 1. Firebase config
+    var firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT.firebaseio.com",
+      projectId: "YOUR_PROJECT",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.database();
+
+    // 2. Get IP
+    fetch('https://ipinfo.io/json?token=YOUR_IPINFO_TOKEN')
+    .then(response => response.json())
+    .then(data => {
+      let info = {
+        ip: data.ip,
+        city: data.city,
+        region: data.region,
+        country: data.country,
+        userAgent: navigator.userAgent,
+        timestamp: new Date().toISOString()
+      };
+      let number = new URLSearchParams(window.location.search).get('number') || 'unknown';
+      db.ref('logs/' + number).push(info);
+      document.getElementById('result').textContent = JSON.stringify(info, null, 2);
+    });
+  </script>
+</body>
+</html>
